@@ -1,6 +1,7 @@
 package com.company;
 
 import java.io.*;
+import java.math.BigInteger;
 import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,37 +20,52 @@ public class PrzegladanieGrafu {  // zrobić abstract jak zadziala wczytanie
     // tablica list sasiedztwa danego wierzcholka
     private List<Integer>[] neighborList;
 
-
-//    /**
-//     * pobieranie grafu z pliku tekstowego podanego w kosntruktorze
-//     * linia po lini
-//     * @param fileName
-//     */
+    /**
+     * pobieranie grafu z pliku tekstowego podanego w kosntruktorze
+     * linia po lini
+     * @param fileName
+     */
 //    public  PrzegladanieGrafu(String fileName) {
-//        try  {
+//        try {
 //
 //            BufferedReader br = new BufferedReader(new FileReader(new File(fileName)));
 //            boolean first = true;
 //            String line;
+//            int lineCounter = 0; // licznik wczytanych lini
 //
-//            while((line = br.readLine()) !=null){
-//                if(first) {
-//                    List<String> listaWierzcholkow = new ArrayList<>();
-//                    String [] wierzcholki = line.split(" ");
-//                    int iloscWierzcholkow = wierzcholki.length;
-//                    for (int i=0; i< iloscWierzcholkow; i++) {
-////                        String wierzcholek = wierzcholki[i];
-//                        listaWierzcholkow.add(wierzcholki[i]);
 //
-//                    }
-//                        for (String i : listaWierzcholkow) {
-//                            System.out.print(i);
+//            while ((line = br.readLine()) != null) {
+//
+//
+//                String[] linia0 = line.split(" ");
+//                int iloscWierzcholkow = linia0.length;
+//
+//
+//                        //wczytanie lini 0; .
+//                        if (lineCounter == 0) {
+//                            System.out.println("Liczba wierzchołków: " + iloscWierzcholkow + "\n");
+//                            PrzegladanieGrafu graph = new PrzegladanieGrafu(iloscWierzcholkow);
+//                            System.out.print("Linia 0) ");
+//                            for (String j : linia0) {
+//                                System.out.print(j + " ");
+//
+//                            }
+//                            System.out.print("\n");
 //                        }
-//                } else{
-//                    System.out.print("blad");
-//                }
 //
+//                        // linie od 1 do N+1 - listy sasiedztwa oddzielonee spacjami (wierzchołek lista sąsiadów)
+//                        if (lineCounter > 0 && lineCounter <= iloscWierzcholkow + 1) {
+//                            String[] kolejnaLinia = line.split(" ");
+//                            BigInteger lineNext = new BigInteger(line.getBytes());
+//                            //System.out.println(lineNext);
+//                            System.out.println("Wczytana Linia " +lineNext );
+//                            //graph.addEdge(i,i);
+//                        }
+//                //wypisanie grafu w postaci listy sasiedztwa
+//                System.out.println("Graf nieskierowany: " + graph);
+//                lineCounter++; // zwiekszamy licznik wczytanych lini
 //            }
+//
 //            br.close();
 //        } catch (FileNotFoundException e) {
 //            e.printStackTrace();
@@ -57,65 +73,7 @@ public class PrzegladanieGrafu {  // zrobić abstract jak zadziala wczytanie
 //            e.printStackTrace();
 //        }
 //    }
-
-    /**
-     * pobieranie grafu z pliku tekstowego podanego w kosntruktorze
-     * linia po lini
-     * @param fileName
-     */
-    public  PrzegladanieGrafu(String fileName) {
-        try {
-
-            BufferedReader br = new BufferedReader(new FileReader(new File(fileName)));
-            boolean first = true;
-            String line;
-            int lineCounter = 0; // licznik wczytanych lini
-            while ((line = br.readLine()) != null) {
-                lineCounter++; // zwiekszamy licznik wczytanych lini
-
-                if (first) {
-                    first = false;
-
-                    String[] wierzcholki = line.split(" ");
-                    int iloscWierzcholkow = wierzcholki.length;
-                    System.out.println("Liczba wierzchołków: " + iloscWierzcholkow + "\n");
-                    PrzegladanieGrafu graph = new PrzegladanieGrafu(iloscWierzcholkow);
-
-                    //przejscie po wszytkich liniach pliku
-                    for (int i = 0; i <=iloscWierzcholkow+3; i++) {
-                        //wczytanie lini 0; .
-                        if (i == 0) {
-                            System.out.print("Linia 0) ");
-                            for (String j : wierzcholki) {
-                                System.out.print(j+ " ");
-
-                            }
-                            System.out.print("\n");
-
-                        }
-                        // linie od 1 do N+1 - listy sasiedztwa oddzielonee spacjami (wierzchołek lista sąsiadów)
-                        if (i > 0 && i <= iloscWierzcholkow + 1) {
-
-                            System.out.println("Wczytana Linia " +i+ ") ");
-                            //graph.addEdge(i,i);
-                        }
-                    }
-
-                    //wypisanie grafu w postaci listy sasiedztwa
-                    System.out.println("Graf nieskierowany: " + graph);
-                }
-
-            }
-
-
-            br.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
+//
 
     /**
      *

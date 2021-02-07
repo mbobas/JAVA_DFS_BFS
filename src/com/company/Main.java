@@ -19,7 +19,16 @@ public class Main {
 
     public static void main(String[] args) {
 	// write your code here
-        PrzegladanieGrafu przegladanie = new PrzegladanieGrafu("graf.txt");
+
+
+        WczytajGraph graph = new WczytajGraph("graf.txt");
+        System.out.println("\n Graf nieskierowany: " + graph);
+//        System.out.println("DFS \n");
+//
+//        DFS dfs = new DFS(graph, 0);
+//        System.out.println("\n BFS \n");
+//        BFS bfs = new BFS(graph, 0);
+
         // grafy nieskierowane
         // PrzegladanieGrafu graph = new PrzegladanieGrafu(6);
 
