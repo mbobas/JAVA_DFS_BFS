@@ -9,17 +9,17 @@ public class BFS {
         // tablica krawedzi ktora jest
         // przechowuje wierzcholki z ktorych mozna sie dostac do biezacego
         // okreslonego indeksem tablicy
-        private int[] edgeTo;
+        private int[] listaKrawedzi;
         // tablica odwiedzonych wierzcholkow
-        private boolean[] marked;
+        private boolean[] listaOdwiedzonychWierzcholkow;
         // wierzcholek zrodlowy, z ktorego rozpoczynamy przeszukiwanie
         private final int source;
         private Queue<Integer> priorityQueue;
 
-        public BFS(WczytajGraph graph, int source) {
+        public BFS(PrzegladanieGrafu graph, int source) {
             this.source = source;
-            edgeTo = new int[graph.getNumberOfVertices()];
-            marked = new boolean[graph.getNumberOfVertices()];
+            listaKrawedzi = new int[graph.getNumberOfVertices()];
+            listaOdwiedzonychWierzcholkow = new boolean[graph.getNumberOfVertices()];
             priorityQueue = new PriorityQueue<Integer>(graph.getNumberOfVertices());
             priorityQueue.offer(source);
             bfs(graph, source);
@@ -34,7 +34,7 @@ public class BFS {
          *         konstruktorze do wierzcholka {@code vertex}
          */
         public boolean hasPathTo(int vertex) {
-            return marked[vertex];
+            return listaOdwiedzonychWierzcholkow[vertex];
         }
 
         /**
@@ -52,7 +52,7 @@ public class BFS {
                 return path;
             }
             // dopoki istnieje wierzcholek dodawaj go do stosu
-            for (int w = vertex; w != source; w = edgeTo[w]) {
+            for (int w = vertex; w != source; w = listaKrawedzi[w]) {
                 path.push(w);
                //System.out.println(w);
             }
@@ -61,12 +61,9 @@ public class BFS {
             return path;
         }
 
-        private void bfs(WczytajGraph graph, int vertex) {
+        private void bfs(PrzegladanieGrafu graph, int vertex) {
             // oznaczamy wierzcholek jako odwiedzony
-            marked[vertex] = true;
-            int w0 = vertex+65;
-            char c0=(char)w0;
-            //System.out.println(c0);
+            listaOdwiedzonychWierzcholkow[vertex] = true;
             // dodajemy wierzcholek zrodlowy do kolejki
             priorityQueue.offer(vertex);
 
@@ -81,9 +78,9 @@ public class BFS {
                 char c1=(char)w1;
                 System.out.println(c1);
                 for (int w : graph.getneighborList(v)) {
-                    if (!marked[w]) {
-                        edgeTo[w] = v;
-                        marked[w] = true;
+                    if (!listaOdwiedzonychWierzcholkow[w]) {
+                        listaKrawedzi[w] = v;
+                        listaOdwiedzonychWierzcholkow[w] = true;
                         priorityQueue.offer(w);
                     }
                 }

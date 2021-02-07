@@ -21,7 +21,7 @@ public class Main {
 	// write your code here
 
 
-        WczytajGraph graph = new WczytajGraph("graf.txt");
+        PrzegladanieGrafu graph = new PrzegladanieGrafu("graf.txt");
         System.out.println("\n Graf nieskierowany: " + graph);
 //        System.out.println("DFS \n");
 //

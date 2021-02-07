@@ -7,16 +7,16 @@ public class DFS {
     // tablica krawedzi ktora jest
     // przechowuje wierzcholki z ktorych mozna sie dostac do biezacego
     // okreslonego indeksem tablicy
-    private int[] edgeTo;
+    private int[] listaKrawedzi;
     // tablica odwiedzonych wierzcholkow
-    private boolean[] marked;
+    private boolean[] listaOdwiedzonychWierzcholkow;
     // wierzcholek zrodlowy, z ktorego rozpoczynamy przeszukiwanie
     private final int source;
 
-    public DFS(WczytajGraph graph, int source) {
+    public DFS(PrzegladanieGrafu graph, int source) {
         this.source = source;
-        edgeTo = new int[graph.getNumberOfVertices()];
-        marked = new boolean[graph.getNumberOfVertices()];
+        listaKrawedzi = new int[graph.getNumberOfVertices()];
+        listaOdwiedzonychWierzcholkow = new boolean[graph.getNumberOfVertices()];
         dfs(graph, source);
     }
 
@@ -29,7 +29,7 @@ public class DFS {
      *         konstruktorze do wierzcholka {@code vertex}
      */
     public boolean hasPathTo(int vertex) {
-        return marked[vertex];
+        return listaOdwiedzonychWierzcholkow[vertex];
     }
 
     /**
@@ -47,7 +47,7 @@ public class DFS {
             return path;
         }
         // dopoki istnieje wierzcholek dodawaj go do stosu
-        for (int w = vertex; w != source; w = edgeTo[w]) {
+        for (int w = vertex; w != source; w = listaKrawedzi[w]) {
             path.push(w);
         }
         // dodaj na koniec krawedz zrodlowa
@@ -55,9 +55,9 @@ public class DFS {
         return path;
     }
 
-    private void dfs(WczytajGraph graph, int vertex) {
+    private void dfs(PrzegladanieGrafu graph, int vertex) {
         // oznaczamy wierzcholek jako odwiedzony
-        marked[vertex] = true;
+        listaOdwiedzonychWierzcholkow[vertex] = true;
         int w0 = vertex+65;
         char c0=(char)w0;
         System.out.println(c0);
@@ -65,8 +65,8 @@ public class DFS {
         // wywolujemy rekurencyjnie metode dfs, ktora odwiedzi wierzchoki i
         // zapisze trase
         for (int w : graph.getneighborList(vertex)) {
-            if (!marked[w]) {
-                edgeTo[w] = vertex;
+            if (!listaOdwiedzonychWierzcholkow[w]) {
+                listaKrawedzi[w] = vertex;
                 dfs(graph, w);
             }
         }
