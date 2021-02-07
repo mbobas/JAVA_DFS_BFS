@@ -5,3 +5,4 @@ C B E
 D B
 E C
 A
+BFS

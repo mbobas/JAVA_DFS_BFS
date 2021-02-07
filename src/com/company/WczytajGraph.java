@@ -74,14 +74,31 @@ public class WczytajGraph {  // zrobić abstract jak zadziala wczytanie
                         }
                         //wierzcholek startowy
                         if (lineCounter == v+1) {
-                            System.out.println("DFS \n");
-                            DFS dfs = new DFS(this, 0);
-                            System.out.println("BFS \n");
-                            BFS bfs = new BFS(this, 0);
-                }
+                            String[] kolejnaLinia = line.split(" ");
+                            BigInteger lineNext = new BigInteger(kolejnaLinia[0].getBytes());
+                            start = lineNext.intValue()-65;
+                            System.out.println("start: "+start);
+                            lineCounter++;
+                        }
+                        if (lineCounter == v+2 ) {
+                            System.out.println("v+2 ready");
+                            String kolejnaLinia = br.readLine();
+                            System.out.println("Metoda: " + kolejnaLinia);
+                            //String[] kolejnaLinia = line.split(" ");
+                            if (kolejnaLinia.equals("DFS")) {
+                                System.out.println("DFS \n");
+                                DFS dfs = new DFS(this, start);
+
+                            }else {
+                                System.out.println("BFS \n");
+                                BFS bfs = new BFS(this, start);
+
+                            }
+                        }
                 //wypisanie grafu w postaci listy sasiedztwa
 //                System.out.println("Graf nieskierowany: " + toString());
                 lineCounter++; // zwiekszamy licznik wczytanych lini
+                System.out.println("LicznikLini: " + lineCounter);
             }
 
 
